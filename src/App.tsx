@@ -3,7 +3,7 @@
  * GDX-VR Company Website
  */
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import { Suspense, lazy } from 'react'
 import { HomeSkeleton } from '@/components/ui/Skeleton'
 
@@ -24,7 +24,7 @@ function PageLoader() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -33,7 +33,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Suspense>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
