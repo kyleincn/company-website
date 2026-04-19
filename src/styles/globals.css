@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GDX-VR Design System - Global Styles */
+:root {
+  /* 色彩系统 - GDX-VR Design System */
+  --primary: #0066FF;
+  --primary-dark: #0052CC;
+  --primary-light: #E6F0FF;
+  --deep-space: #0A1628;
+  --aurora-cyan: #00D4FF;
+  --smart-purple: #6366F1;
+  --energy-orange: #FF6B35;
+  --eco-green: #10B981;
+
+  /* 中性色 */
+  --text-primary: #1F2937;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F9FAFB;
+  --border-color: #E5E7EB;
+
+  /* 深色模式变量 */
+  --dark-bg: #0A1628;
+  --dark-bg-secondary: #111827;
+  --dark-card: #1F2937;
+  --dark-text: #F9FAFB;
+
+  /* 渐变 - 按设计规范 */
+  --gradient-primary: linear-gradient(135deg, #0066FF 0%, #0A1628 100%);
+  --gradient-hero: linear-gradient(135deg, #0066FF 0%, #0A1628 100%);
+  --gradient-dark: linear-gradient(180deg, #0A1628 0%, #111827 100%);
+
+  /* 阴影 */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 40px rgba(0,102,255,0.15);
+  --shadow-glow: 0 0 40px rgba(0, 102, 255, 0.3), 0 0 80px rgba(0, 212, 255, 0.1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-text-primary bg-white antialiased;
+    overflow-x: hidden;
+  }
+
+  /* 自定义滚动条 */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+}
+
+@layer components {
+  /* 容器 */
+  .container-page {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* 渐变文字 */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #00D4FF 0%, #FFFFFF 50%, #00D4FF 100%);
+  }
+
+  /* 渐变边框 */
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    border-radius: inherit;
+    background: var(--gradient-primary);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+  }
+
+  /* 玻璃态效果 */
+  .glass {
+    @apply bg-white/90 backdrop-blur-xl;
+  }
+
+  /* 卡片悬浮效果 - 按设计规范 8px上移, 150ms */
+  .card-hover {
+    @apply transition-all duration-150 ease-out;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0,102,255,0.15);
+  }
+
+  /* 按钮基础样式 */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply btn bg-white text-primary hover:bg-gray-50 hover:-translate-y-0.5;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-secondary {
+    @apply btn bg-transparent text-white border-2 border-white/30 hover:bg-white/10 hover:border-white/50;
+  }
+
+  .btn-cta {
+    @apply btn bg-primary text-white hover:bg-primary-dark hover:-translate-y-0.5;
+    box-shadow: 0 4px 14px rgba(0, 102, 255, 0.25);
+  }
+
+  .btn-cta:hover {
+    box-shadow: 0 6px 20px rgba(0, 102, 255, 0.35);
+    @apply -translate-y-0.5;
+  }
+}
+
+@layer utilities {
+  /* 动画延迟 */
+  .animation-delay-100 { animation-delay: 0.1s; }
+  .animation-delay-200 { animation-delay: 0.2s; }
+  .animation-delay-300 { animation-delay: 0.3s; }
+  .animation-delay-400 { animation-delay: 0.4s; }
+  .animation-delay-500 { animation-delay: 0.5s; }
+
+  /* 浮动光球 - 按设计规范 6s ease-in-out infinite, 20px偏移 */
+  .orb {
+    @apply absolute rounded-full blur-3xl;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .orb-1 {
+    @apply w-96 h-96;
+    background: rgba(0, 212, 255, 0.3);
+    top: 10%;
+    right: 10%;
+  }
+
+  .orb-2 {
+    @apply w-72 h-72;
+    background: rgba(99, 102, 241, 0.3);
+    bottom: 20%;
+    left: 5%;
+    animation-delay: -3s;
+  }
+
+  /* 浮动动画关键帧 - 20px垂直偏移 */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  /* 网格背景 */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* 滚动指示器 */
+  .scroll-indicator {
+    @apply absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 text-xs;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  .scroll-arrow {
+    @apply w-6 h-6 border-r-2 border-b-2 border-current rotate-45;
+  }
+
+  /* 渐变遮罩 */
+  .gradient-overlay {
+    background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, transparent 50%);
+  }
+
+  /* 骨架屏shimmer动画 */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 1.5s ease-in-out infinite;
+    background-size: 200% 100%;
+  }
+
+  /* 数字渐变色 */
+  .text-gradient-primary {
+    background: linear-gradient(135deg, #0066FF 0%, #00D4FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
